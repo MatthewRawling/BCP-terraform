@@ -51,13 +51,25 @@ variable "bastion_ami_uat" {
 }
 
 variable "application_ami_uat" {
-  default     = "ami-0a083a4a37cc07d28"
+  default     = "ami-0dd8608397c059e79"
   type        = string
   description = "AMI for UAT application EC2 instance"
 }
 
 variable "mapping_ami_uat" {
-  default     = "ami-09751b35c387988e0"
+  default     = "ami-059f3c759c483100c"
+  type        = string
+  description = "AMI for UAT mapping EC2 instance"
+}
+
+variable "application_ami_uat_temp" {
+  default     = "ami-0426a02594e0cdb2f"
+  type        = string
+  description = "AMI for UAT application EC2 instance"
+}
+
+variable "mapping_ami_uat_temp" {
+  default     = "ami-059f3c759c483100c"
   type        = string
   description = "AMI for UAT mapping EC2 instance"
 }
@@ -206,7 +218,6 @@ variable "uat-cw-eval" {
 #  type        = string
 #  description = "Unhealthy threshold. The number of consecutive health check failures required before considering a target unhealthy."
 #}
-#
 #variable "uat-tg-timeout" {
 #  default     = "120"
 #  type        = string
