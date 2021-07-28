@@ -29,7 +29,7 @@ resource "aws_launch_configuration" "PROD-MAP-LC" {
 # Create PROD APP Temporary Launch Configuration
 resource "aws_launch_configuration" "PROD-APP-LC-TEMP" {
   name = "PROD BCE Temporary Application Launch Configuration"
-  image_id               = var.application_ami_prod
+  image_id               = var.application_ami_prod_temp
   instance_type          = "m5a.large"
   iam_instance_profile = "${aws_iam_instance_profile.prod-ec2-cloudwatch.name}"
   security_groups        = ["${aws_security_group.PROD-EC2-APP-SG.id}"]
@@ -43,7 +43,7 @@ resource "aws_launch_configuration" "PROD-APP-LC-TEMP" {
 # Create PROD MAP Temporary Launch Configuration
 resource "aws_launch_configuration" "PROD-MAP-LC-TEMP" {
   name = "PROD BCE Temporary Mapping Launch Configuration"
-  image_id               = var.mapping_ami_prod
+  image_id               = var.mapping_ami_prod_temp
   instance_type          = "c5a.4xlarge"
   iam_instance_profile = "${aws_iam_instance_profile.prod-ec2-cloudwatch.name}"
   security_groups        = ["${aws_security_group.PROD-EC2-MAP-SG.id}"]

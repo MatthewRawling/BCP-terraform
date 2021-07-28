@@ -51,13 +51,25 @@ variable "bastion_ami_prod" {
 }
 
 variable "application_ami_prod" {
-  default     = "ami-00ae564b65e1d5e37"
+  default     = "ami-0c62e4caa3bf6f4e1"
   type        = string
   description = "AMI for PROD application EC2 instance"
 }
 
 variable "mapping_ami_prod" {
-  default     = "ami-04afeb98307e6c206"
+  default     = "ami-0c011e62109f4bc49"
+  type        = string
+  description = "AMI for PROD mapping EC2 instance"
+}
+
+variable "application_ami_prod_temp" {
+  default     = "ami-0c62e4caa3bf6f4e1"
+  type        = string
+  description = "AMI for PROD application EC2 instance"
+}
+
+variable "mapping_ami_prod_temp" {
+  default     = "ami-0c011e62109f4bc49"
   type        = string
   description = "AMI for PROD mapping EC2 instance"
 }
