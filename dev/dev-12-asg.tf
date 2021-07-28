@@ -29,7 +29,7 @@ resource "aws_launch_configuration" "DEV-MAP-LC" {
 # Create DEV APP Temporary Launch Configuration
 resource "aws_launch_configuration" "DEV-APP-LC-TEMP" {
   name = "DEV BCE Temporary Application Launch Configuration"
-  image_id               = var.application_ami_dev
+  image_id               = var.application_ami_dev_temp
   instance_type          = "t3.medium"
   iam_instance_profile = "${aws_iam_instance_profile.dev-ec2-cloudwatch.name}"
   security_groups        = ["${aws_security_group.DEV-EC2-APP-SG.id}"]
@@ -43,7 +43,7 @@ resource "aws_launch_configuration" "DEV-APP-LC-TEMP" {
 # Create DEV MAP Temporary Launch Configuration
 resource "aws_launch_configuration" "DEV-MAP-LC-TEMP" {
   name = "DEV BCE Temporary Mapping Launch Configuration"
-  image_id               = var.mapping_ami_dev
+  image_id               = var.mapping_ami_dev_temp
   instance_type          = "t3.medium"
   iam_instance_profile = "${aws_iam_instance_profile.dev-ec2-cloudwatch.name}"
   security_groups        = ["${aws_security_group.DEV-EC2-MAP-SG.id}"]
@@ -58,7 +58,7 @@ resource "aws_launch_configuration" "DEV-MAP-LC-TEMP" {
 resource "aws_autoscaling_group" "DEV-APP-ASG" {
   count = "1"
   name = "DEV Application Auto Scale Group"
-  launch_configuration = "${aws_launch_configuration.DEV-APP-LC.id}"
+  launch_configuration = "${aws_launch_configuration.DEV-APP-LC-TEMP.id}"
   # availability_zones = var.availability_zones
   vpc_zone_identifier = aws_subnet.dev-private.*.id
   min_size = 1
@@ -108,7 +108,7 @@ resource "aws_autoscaling_group" "DEV-APP-ASG" {
 resource "aws_autoscaling_group" "DEV-MAP-ASG" {
   count = "1"
   name = "DEV Mapping Auto Scale Group"
-  launch_configuration = "${aws_launch_configuration.DEV-MAP-LC.id}"
+  launch_configuration = "${aws_launch_configuration.DEV-MAP-LC-TEMP.id}"
   # availability_zones = var.availability_zones
   vpc_zone_identifier = aws_subnet.dev-private.*.id
   min_size = 1

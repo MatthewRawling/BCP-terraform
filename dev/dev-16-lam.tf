@@ -1,4 +1,5 @@
-
+# DEV Lambda function and role permissions for cloudwatch transfer to S3 
+ 
 data "archive_file" "dev_log_exporter" {
   type        = "zip"
   source_file = "${path.module}/lambda/cloudwatch-to-s3.py"
