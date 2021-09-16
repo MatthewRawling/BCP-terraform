@@ -8,7 +8,7 @@ resource "aws_launch_configuration" "PROD-APP-LC" {
   key_name               = var.key_pair
   enable_monitoring = true
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = false
   }
 }
 
@@ -22,7 +22,7 @@ resource "aws_launch_configuration" "PROD-MAP-LC" {
   key_name               = var.key_pair
   enable_monitoring = true
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = false
   }
 }
 
@@ -36,7 +36,7 @@ resource "aws_launch_configuration" "PROD-APP-LC-TEMP" {
   key_name               = var.key_pair
   enable_monitoring = true
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = false
   }
 }
 
@@ -50,7 +50,7 @@ resource "aws_launch_configuration" "PROD-MAP-LC-TEMP" {
   key_name               = var.key_pair
   enable_monitoring = true
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = false
   }
 }
 
@@ -58,7 +58,7 @@ resource "aws_launch_configuration" "PROD-MAP-LC-TEMP" {
 resource "aws_autoscaling_group" "PROD-APP-ASG" {
   count = "1"
   name = "PROD Application Auto Scale Group"
-  launch_configuration = "${aws_launch_configuration.PROD-APP-LC.id}"
+  launch_configuration = "${aws_launch_configuration.PROD-APP-LC-TEMP.id}"
   # availability_zones = var.availability_zones
   vpc_zone_identifier = aws_subnet.prod-private.*.id
   min_size = 2
@@ -87,7 +87,7 @@ resource "aws_autoscaling_group" "PROD-APP-ASG" {
           "WarmPoolWarmedCapacity",
         ]
   target_group_arns = ["${aws_lb_target_group.PROD-BCE-APP-TG.arn}", "${aws_lb_target_group.PROD-BCS-APP-TG.arn}", "${aws_lb_target_group.PROD-BCW-APP-TG.arn}", "${aws_lb_target_group.PROD-CFFG-APP-TG.arn}"]
-  termination_policies = ["NewestInstance"]
+  termination_policies = ["OldestInstance"]
   health_check_type = "ELB"
   lifecycle {
     create_before_destroy = true
@@ -108,7 +108,7 @@ resource "aws_autoscaling_group" "PROD-APP-ASG" {
 resource "aws_autoscaling_group" "PROD-MAP-ASG" {
   count = "1"
   name = "PROD Mapping Auto Scale Group"
-  launch_configuration = "${aws_launch_configuration.PROD-MAP-LC.id}"
+  launch_configuration = "${aws_launch_configuration.PROD-MAP-LC-TEMP.id}"
   # availability_zones = var.availability_zones
   vpc_zone_identifier = aws_subnet.prod-private.*.id
   min_size = 2
@@ -137,7 +137,7 @@ resource "aws_autoscaling_group" "PROD-MAP-ASG" {
           "WarmPoolWarmedCapacity",
         ]
   target_group_arns = ["${aws_lb_target_group.PROD-BCE-MAP-TG.arn}", "${aws_lb_target_group.PROD-BCS-MAP-TG.arn}", "${aws_lb_target_group.PROD-BCW-MAP-TG.arn}", "${aws_lb_target_group.PROD-CFFG-MAP-TG.arn}"]
-  termination_policies = ["NewestInstance"]
+  termination_policies = ["OldestInstance"]
   health_check_type = "ELB"
   lifecycle {
     create_before_destroy = true
