@@ -51,25 +51,25 @@ variable "bastion_ami_dev" {
 }
 
 variable "application_ami_dev" {
-  default     = "ami-0787fa049e394cb29"
+  default     = "ami-09f21e420eb452bba"
+  type        = string
+  description = "AMI for DEV application EC2 instance"
+}
+
+variable "application_ami_dev_temp" {
+  default     = "ami-04a297aac3bddd687"
   type        = string
   description = "AMI for DEV application EC2 instance"
 }
 
 variable "mapping_ami_dev" {
-  default     = "ami-0b68e58e46a75f427"
+  default     = "ami-0f0b3d5fd0bde523b"
   type        = string
   description = "AMI for DEV mapping EC2 instance"
 }
 
-variable "application_ami_dev_temp" {
-  default     = "ami-0d8e5243b2be83450"
-  type        = string
-  description = "AMI for DEV application EC2 instance"
-}
-
 variable "mapping_ami_dev_temp" {
-  default     = "ami-0b68e58e46a75f427"
+  default     = "ami-068af074d41a4578e"
   type        = string
   description = "AMI for DEV mapping EC2 instance"
 }
