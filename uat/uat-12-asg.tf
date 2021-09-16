@@ -8,7 +8,7 @@ resource "aws_launch_configuration" "UAT-APP-LC" {
   key_name               = var.key_pair
   enable_monitoring = true
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = false
   }
 }
 
@@ -22,7 +22,7 @@ resource "aws_launch_configuration" "UAT-MAP-LC" {
   key_name               = var.key_pair
   enable_monitoring = true
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = false
   }
 }
 
@@ -36,7 +36,7 @@ resource "aws_launch_configuration" "UAT-APP-LC-TEMP" {
   key_name               = var.key_pair
   enable_monitoring = true
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = false
   }
 }
 
@@ -50,7 +50,7 @@ resource "aws_launch_configuration" "UAT-MAP-LC-TEMP" {
   key_name               = var.key_pair
   enable_monitoring = true
   lifecycle {
-    create_before_destroy = true
+    create_before_destroy = false
   }
 }
 
@@ -58,7 +58,7 @@ resource "aws_launch_configuration" "UAT-MAP-LC-TEMP" {
 resource "aws_autoscaling_group" "UAT-APP-ASG" {
   count = "1"
   name = "UAT Application Auto Scale Group"
-  launch_configuration = "${aws_launch_configuration.UAT-APP-LC-TEMP.id}"
+  launch_configuration = "${aws_launch_configuration.UAT-APP-LC.id}"
   # availability_zones = var.availability_zones
   vpc_zone_identifier = aws_subnet.uat-private.*.id
   min_size = 1
@@ -87,7 +87,7 @@ resource "aws_autoscaling_group" "UAT-APP-ASG" {
           "WarmPoolWarmedCapacity",
         ]
   target_group_arns = ["${aws_lb_target_group.UAT-BCE-APP-TG.arn}", "${aws_lb_target_group.UAT-BCS-APP-TG.arn}", "${aws_lb_target_group.UAT-BCW-APP-TG.arn}", "${aws_lb_target_group.UAT-CFFG-APP-TG.arn}"]
-  termination_policies = ["NewestInstance"]
+  termination_policies = ["OldestInstance"]
   health_check_type = "ELB"
   lifecycle {
     create_before_destroy = true
@@ -108,7 +108,7 @@ resource "aws_autoscaling_group" "UAT-APP-ASG" {
 resource "aws_autoscaling_group" "UAT-MAP-ASG" {
   count = "1"
   name = "UAT Mapping Auto Scale Group"
-  launch_configuration = "${aws_launch_configuration.UAT-MAP-LC-TEMP.id}"
+  launch_configuration = "${aws_launch_configuration.UAT-MAP-LC.id}"
   # availability_zones = var.availability_zones
   vpc_zone_identifier = aws_subnet.uat-private.*.id
   min_size = 1
@@ -137,7 +137,7 @@ resource "aws_autoscaling_group" "UAT-MAP-ASG" {
           "WarmPoolWarmedCapacity",
         ]
   target_group_arns = ["${aws_lb_target_group.UAT-BCE-MAP-TG.arn}", "${aws_lb_target_group.UAT-BCS-MAP-TG.arn}", "${aws_lb_target_group.UAT-BCW-MAP-TG.arn}", "${aws_lb_target_group.UAT-CFFG-MAP-TG.arn}"]
-  termination_policies = ["NewestInstance"]
+  termination_policies = ["OldestInstance"]
   health_check_type = "ELB"
   lifecycle {
     create_before_destroy = true
