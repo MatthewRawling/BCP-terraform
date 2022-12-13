@@ -5,6 +5,8 @@ resource "aws_kms_key" "dev-kms" {
   deletion_window_in_days  = 10
   key_usage                = "ENCRYPT_DECRYPT"
   customer_master_key_spec = "SYMMETRIC_DEFAULT"
+  bypass_policy_lockout_safety_check = false
+  enable_key_rotation                = true
 }
 
 #DEV Bucket Setup
@@ -434,6 +436,9 @@ resource "aws_s3_bucket" "dev-bcp-logs" {
   versioning {
     enabled = true
   }
+logging {
+  target_bucket = "dev-bcp-logs"
+}
 grant {
     id          = data.aws_canonical_user_id.current_user.id
     type        = "CanonicalUser"
@@ -803,13 +808,14 @@ force_destroy = true
     prevent_destroy = false
   }
 
-#server_side_encryption_configuration {
-#    rule {
-#      apply_server_side_encryption_by_default {
-#        sse_algorithm = "aws:kms"
-#      }
-#    }
-#  }
+server_side_encryption_configuration {
+    rule {
+        bucket_key_enabled = false
+        apply_server_side_encryption_by_default {
+        sse_algorithm = "aws:kms"
+      }
+    }
+  }
 }
 
 resource "aws_s3_bucket_policy" "dev-public-read" {

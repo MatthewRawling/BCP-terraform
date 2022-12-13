@@ -2,6 +2,7 @@
 
 resource "aws_sns_topic" "dev-cloudwatch-alerts" {
   name = "DEV-CloudWatch-Alerts"
+  kms_master_key_id = "alias/aws/sns"
 }
 
 resource "aws_sns_topic_subscription" "dev_sns_subsctiption" {
@@ -224,4 +225,8 @@ resource "aws_cloudwatch_log_group" "dev-geoserver" {
   retention_in_days = "0"
 }
 
+resource "aws_cloudwatch_log_group" "dev-vpclogs" {
+  name = "DevVPCLogGroup"
+  retention_in_days = "0"
+}
 

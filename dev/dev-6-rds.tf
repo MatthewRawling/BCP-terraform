@@ -11,6 +11,7 @@ resource "aws_db_instance" "dev-bcp-db" {
   instance_class       = "db.t3.medium"
   identifier           = "dev-bcp-db"
   storage_encrypted    = "true"
+  auto_minor_version_upgrade = false
 #  username             = "xxx"
 #  password             = "xxx"
   db_subnet_group_name = aws_db_subnet_group.dev-rds-sub.id

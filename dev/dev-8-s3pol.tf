@@ -381,7 +381,7 @@ POLICY
 
 # policy to allow s3 iam user to write to buckets
 
-resource "aws_s3_bucket_policy" "s3-dec-cffg-response-policy" {
+resource "aws_s3_bucket_policy" "s3-dev-cffg-response-policy" {
   bucket = aws_s3_bucket.dev-cffg-response.id
 
   policy = <<POLICY

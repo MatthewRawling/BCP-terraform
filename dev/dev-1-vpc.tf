@@ -10,6 +10,19 @@ resource "aws_ebs_encryption_by_default" "dev-encryption" {
   enabled = true
 }
 
+terraform {
+   required_providers {    
+    aws = {
+         source = "hashicorp/aws"
+         version =  "~> 3.74.2"
+    }
+    consul = {
+      source = "hashicorp/consul"
+    }
+  }
+  required_version = ">= 0.13"
+}
+
 # BCP-DEV VPC resources: This will create 1 VPC with 4 Subnets, 1 Internet Gateway, 4 Route Tables. 
 
 resource "aws_vpc" "dev-default" {
@@ -147,3 +160,16 @@ resource "aws_cognito_user_group" "dev-drupal" {
   precedence   = 42
   # role_arn     = aws_iam_role.group_role.arn
 }
+
+# DEV VPC Flow Logging
+
+resource "aws_flow_log" "dev-vpc-flowlog" {
+  iam_role_arn    = aws_iam_role.dev-ec2-cloudwatch.arn
+  log_destination = aws_cloudwatch_log_group.dev-vpclogs.arn
+  traffic_type    = "ALL"
+  vpc_id          = aws_vpc.dev-default.id
+  tags = {
+	Name            = "DEV VPC Flow Log"
+	}
+}
+
