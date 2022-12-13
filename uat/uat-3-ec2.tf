@@ -30,6 +30,13 @@ resource "aws_instance" "UAT-EC2-BAST" {
   key_name = var.key_pair
   associate_public_ip_address = true
   monitoring = "true"
+  metadata_options {
+  http_endpoint = "enabled"
+  http_tokens = "required"
+  }
+  lifecycle {
+    create_before_destroy = false
+  }
 tags = {
     Name = "UAT-EC2-BASTION${count.index + 1}"
   }

@@ -10,6 +10,11 @@ resource "aws_waf_ipset" "uat-bce-waf-ip" {
 
   ip_set_descriptors {
     type  = "IPV4"
+    value = "5.148.17.54/32"
+  }
+
+  ip_set_descriptors {
+    type  = "IPV4"
     value = "213.160.107.50/32"
   }
 
@@ -21,6 +26,11 @@ resource "aws_waf_ipset" "uat-bce-waf-ip" {
   ip_set_descriptors {
     type  = "IPV4"
     value = "51.149.9.240/29"
+  }
+
+  ip_set_descriptors {
+    type  = "IPV4"
+    value = "51.149.8.0/25"
   }
 }
 
@@ -67,6 +77,11 @@ resource "aws_waf_ipset" "uat-bcs-waf-ip" {
   ip_set_descriptors {
     type  = "IPV4"
     value = "92.54.181.130/32"
+  }
+
+  ip_set_descriptors {
+    type  = "IPV4"
+    value = "5.148.17.54/32"
   }
 
   ip_set_descriptors {
@@ -166,6 +181,11 @@ resource "aws_waf_ipset" "uat-bcw-waf-ip" {
 
   ip_set_descriptors {
     type  = "IPV4"
+    value = "5.148.17.54/32"
+  }
+
+  ip_set_descriptors {
+    type  = "IPV4"
     value = "213.160.107.50/32"
   }
 
@@ -238,6 +258,11 @@ resource "aws_waf_ipset" "uat-cffg-waf-ip" {
   ip_set_descriptors {
     type  = "IPV4"
     value = "92.54.181.130/32"
+  }
+
+  ip_set_descriptors {
+    type  = "IPV4"
+    value = "5.148.17.54/32"
   }
 
   ip_set_descriptors {

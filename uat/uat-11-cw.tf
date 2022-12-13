@@ -2,6 +2,7 @@
 
 resource "aws_sns_topic" "uat-cloudwatch-alerts" {
   name = "UAT-CloudWatch-Alerts"
+  kms_master_key_id = "alias/aws/sns"
 }
 
 resource "aws_sns_topic_subscription" "uat_sns_subsctiption" {
@@ -224,4 +225,7 @@ resource "aws_cloudwatch_log_group" "uat-geoserver" {
   retention_in_days = "0"
 }
 
-
+resource "aws_cloudwatch_log_group" "uat-vpclogs" {
+  name = "UatVPCLogGroup"
+  retention_in_days = "0"
+}

@@ -8,9 +8,10 @@ data "aws_db_snapshot" "uat-snap" {
 # Create new staging DB
 
 resource "aws_db_instance" "uat-bcp-db" {
-  instance_class       = "db.m5.large"
+  instance_class       = "db.t3.medium"
   identifier           = "uat-bcp-db"
   storage_encrypted    = "true"
+  auto_minor_version_upgrade = false
 #  username             = "xxx"
 #  password             = "xxx"
   db_subnet_group_name = aws_db_subnet_group.uat-rds-sub.id

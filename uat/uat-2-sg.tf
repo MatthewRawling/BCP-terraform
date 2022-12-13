@@ -6,21 +6,21 @@ resource "aws_security_group" "allow_ssh" {
   description = "Security group for uat bastion server SSH access"
   ingress {
       description = "SSH access"
-      cidr_blocks = ["92.54.181.130/32"]
+      cidr_blocks = ["92.54.181.130/32", "5.148.17.54/32"]
       from_port = 22
       to_port = 22
       protocol = "tcp"
   }
   ingress {
       description = "HTTP access"
-      cidr_blocks = ["92.54.181.130/32"]
+      cidr_blocks = ["92.54.181.130/32", "5.148.17.54/32"]
       from_port = 80
       to_port = 80
       protocol = "tcp"
   }
   ingress {
       description = "HTTPS access"
-      cidr_blocks = ["92.54.181.130/32"]
+      cidr_blocks = ["92.54.181.130/32", "5.148.17.54/32"]
       from_port = 443
       to_port = 443
       protocol = "tcp"
@@ -98,7 +98,7 @@ resource "aws_security_group" "UAT-BCS-EXTALB-SG" {
       from_port = 8080
       to_port = 8080
       protocol = "tcp"
-      cidr_blocks = ["92.54.181.130/32", var.uat_cidr_block]
+      cidr_blocks = ["92.54.181.130/32", "5.148.17.54/32", var.uat_cidr_block]
   }
   egress {
       from_port   = 0
@@ -131,7 +131,7 @@ resource "aws_security_group" "UAT-BCW-EXTALB-SG" {
       from_port = 8080
       to_port = 8080
       protocol = "tcp"
-      cidr_blocks = ["92.54.181.130/32", var.uat_cidr_block]
+      cidr_blocks = ["92.54.181.130/32", "5.148.17.54/32", var.uat_cidr_block]
   }
   egress {
       from_port   = 0
@@ -164,7 +164,7 @@ resource "aws_security_group" "UAT-CFFG-EXTALB-SG" {
       from_port = 8080
       to_port = 8080
       protocol = "tcp"
-      cidr_blocks = ["92.54.181.130/32", var.uat_cidr_block]
+      cidr_blocks = ["92.54.181.130/32", "5.148.17.54/32", var.uat_cidr_block]
   }
   egress {
       from_port   = 0

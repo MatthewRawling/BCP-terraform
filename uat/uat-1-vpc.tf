@@ -10,6 +10,19 @@ resource "aws_ebs_encryption_by_default" "uat-encryption" {
   enabled = true
 }
 
+terraform {
+   required_providers {    
+    aws = {
+         source = "hashicorp/aws"
+         version =  "~> 3.74.2"
+    }
+    consul = {
+      source = "hashicorp/consul"
+    }
+  }
+  required_version = ">= 0.13"
+}
+
 # BCP-UAT VPC resources: This will create 1 VPC with 4 Subnets, 1 Internet Gateway, 4 Route Tables. 
 
 resource "aws_vpc" "uat-default" {
@@ -133,3 +146,16 @@ tags = {
     Name = "UAT-NAT${count.index + 1}"
   }
 }
+
+# UAT VPC Flow Logging
+
+resource "aws_flow_log" "uat-vpc-flowlog" {
+  iam_role_arn    = aws_iam_role.uat-ec2-cloudwatch.arn
+  log_destination = aws_cloudwatch_log_group.uat-vpclogs.arn
+  traffic_type    = "ALL"
+  vpc_id          = aws_vpc.uat-default.id
+  tags = {
+        Name            = "UAT VPC Flow Log"
+        }
+}
+

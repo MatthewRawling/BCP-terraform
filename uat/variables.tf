@@ -45,31 +45,31 @@ variable "key_pair" {
 }
 
 variable "bastion_ami_uat" {
-  default     = "ami-0a1a17886f455a17d"
+  default     = "ami-03d17d5e2b2d0ca4a"
   type        = string
   description = "AMI for bastion EC2 instance"
 }
 
 variable "application_ami_uat" {
-  default     = "ami-06e617a662ca75961"
+  default     = "ami-0eca1d2c5dda20bed"
   type        = string
   description = "AMI for UAT application EC2 instance"
 }
 
 variable "mapping_ami_uat" {
-  default     = "ami-032da61107673de9e"
+  default     = "ami-02013fd085e79dcdc"
   type        = string
   description = "AMI for UAT mapping EC2 instance"
 }
 
 variable "application_ami_uat_temp" {
-  default     = "ami-04528f2a46ac4e298"
+  default     = "ami-0547e35fc34d5cd92"
   type        = string
   description = "AMI for UAT application EC2 instance"
 }
 
 variable "mapping_ami_uat_temp" {
-  default     = "ami-080d9c3116deb27e9"
+  default     = "ami-0bce11c4230e4cd5b"
   type        = string
   description = "AMI for UAT mapping EC2 instance"
 }
