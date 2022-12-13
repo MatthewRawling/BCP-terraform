@@ -26,7 +26,7 @@ variable "uat_cert2" {
 }
 
 variable "uat_cert3" {
-  default     = "arn:aws:acm:us-east-1:181623394163:certificate/c2e5c3ff-172e-4870-9ff9-6efdb3cf8f6d"
+  default     = "arn:aws:acm:us-east-1:181623394163:certificate/53b29a4c-dec5-4cd1-9598-f6489177c5bd"
   type        = string
   description = "cert for UAT bcs site (us)"
 }
