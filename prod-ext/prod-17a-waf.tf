@@ -10,6 +10,11 @@ resource "aws_waf_ipset" "prod-bce-waf-ip-b" {
 
   ip_set_descriptors {
     type  = "IPV4"
+    value = "5.148.17.54/32"
+  }
+
+  ip_set_descriptors {
+    type  = "IPV4"
     value = "213.160.107.50/32"
   }
 
@@ -68,6 +73,11 @@ resource "aws_waf_ipset" "prod-bcs-waf-ip-b" {
   ip_set_descriptors {
     type  = "IPV4"
     value = "92.54.181.130/32"
+  }
+
+  ip_set_descriptors {
+    type  = "IPV4"
+    value = "5.148.17.54/32"
   }
 
   ip_set_descriptors {
@@ -141,7 +151,7 @@ resource "aws_waf_web_acl" "prod-bcs-waf-acl-b" {
   metric_name = "ProdBcsWafAclB"
 
   default_action {
-    type = "BLOCK"
+    type = "ALLOW"
   }
 
   rules {
@@ -163,6 +173,11 @@ resource "aws_waf_ipset" "prod-bcw-waf-ip-b" {
   ip_set_descriptors {
     type  = "IPV4"
     value = "92.54.181.130/32"
+  }
+
+  ip_set_descriptors {
+    type  = "IPV4"
+    value = "5.148.17.54/32"
   }
 
   ip_set_descriptors {
@@ -238,6 +253,11 @@ resource "aws_waf_ipset" "prod-cffg-waf-ip-b" {
   ip_set_descriptors {
     type  = "IPV4"
     value = "92.54.181.130/32"
+  }
+
+  ip_set_descriptors {
+    type  = "IPV4"
+    value = "5.148.17.54/32"
   }
 
   ip_set_descriptors {
