@@ -10,7 +10,9 @@ data "aws_db_snapshot" "prod-snap" {
 resource "aws_db_instance" "prod-bcp-db" {
   instance_class       = "db.m5.8xlarge"
   identifier           = "prod-bcp-db"
+  #iops                 = 20000
   storage_encrypted    = "true"
+  auto_minor_version_upgrade	= "false"
   multi_az             = "true"
 #  username             = "xxx"
 #  password             = "xxx"

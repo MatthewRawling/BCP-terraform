@@ -7,6 +7,10 @@ resource "aws_launch_configuration" "PROD-APP-LC" {
   security_groups        = ["${aws_security_group.PROD-EC2-APP-SG.id}"]
   key_name               = var.key_pair
   enable_monitoring = true
+  metadata_options {
+  http_endpoint = "enabled"
+  http_tokens = "required"
+  }
   lifecycle {
     create_before_destroy = false
   }
@@ -21,6 +25,10 @@ resource "aws_launch_configuration" "PROD-MAP-LC" {
   security_groups        = ["${aws_security_group.PROD-EC2-MAP-SG.id}"]
   key_name               = var.key_pair
   enable_monitoring = true
+  metadata_options {
+  http_endpoint = "enabled"
+  http_tokens = "required"
+  }
   lifecycle {
     create_before_destroy = false
   }
@@ -35,6 +43,10 @@ resource "aws_launch_configuration" "PROD-APP-LC-TEMP" {
   security_groups        = ["${aws_security_group.PROD-EC2-APP-SG.id}"]
   key_name               = var.key_pair
   enable_monitoring = true
+  metadata_options {
+  http_endpoint = "enabled"
+  http_tokens = "required"
+  }
   lifecycle {
     create_before_destroy = false
   }
@@ -49,6 +61,10 @@ resource "aws_launch_configuration" "PROD-MAP-LC-TEMP" {
   security_groups        = ["${aws_security_group.PROD-EC2-MAP-SG.id}"]
   key_name               = var.key_pair
   enable_monitoring = true
+  metadata_options {
+  http_endpoint = "enabled"
+  http_tokens = "required"
+  }
   lifecycle {
     create_before_destroy = false
   }

@@ -2,6 +2,7 @@
 
 resource "aws_sns_topic" "prod-cloudwatch-alerts" {
   name = "PROD-CloudWatch-Alerts"
+  kms_master_key_id = "arn:aws:kms:eu-west-2:975971611990:key/f7c1fef9-c57b-4cc4-b8b3-3cb3730ac03c"
 }
 
 resource "aws_sns_topic_subscription" "prod_sns_subsctiption" {
@@ -194,13 +195,54 @@ resource "aws_cloudwatch_metric_alarm" "prod-rds-connections" {
   alarm_name = "prod-rds-high-connections"
   comparison_operator = "GreaterThanOrEqualToThreshold"
   evaluation_periods = "1"
+  datapoints_to_alarm = "1"
   metric_name = "DatabaseConnections"
   namespace = "AWS/RDS"
   period = "60"
   statistic = "Average"
   treat_missing_data = "missing"
-  threshold = "25"
+  threshold = "250"
   alarm_description = "Alarm at more than 25 concurrent connections"
+  alarm_actions = [aws_sns_topic.prod-cloudwatch-alerts.arn]
+  ok_actions = [aws_sns_topic.prod-cloudwatch-alerts.arn]
+dimensions = {
+        DBInstanceIdentifier = aws_db_instance.prod-bcp-db.id
+      }
+}
+
+# Create PROD CW alarm to alert on high write IOPS
+resource "aws_cloudwatch_metric_alarm" "prod-rds-writeiops" {
+  alarm_name = "prod-rds-high-writeiops"
+  comparison_operator = "GreaterThanOrEqualToThreshold"
+  evaluation_periods = "1"
+  datapoints_to_alarm = "1"
+  metric_name = "WriteIOPS"
+  namespace = "AWS/RDS"
+  period = "60"
+  statistic = "Average"
+  treat_missing_data = "missing"
+  threshold = "2500"
+  alarm_description = "Alarm at more than 10000 IOPS"
+  alarm_actions = [aws_sns_topic.prod-cloudwatch-alerts.arn]
+  ok_actions = [aws_sns_topic.prod-cloudwatch-alerts.arn]
+dimensions = {
+        DBInstanceIdentifier = aws_db_instance.prod-bcp-db.id
+      }
+}
+
+# Create PROD CW alarm to alert on low rds storage credits
+resource "aws_cloudwatch_metric_alarm" "prod-rds-low-storage-burst-balance" {
+  alarm_name = "prod-rds-low-storage-burst-balance"
+  comparison_operator = "LessThanOrEqualToThreshold"
+  evaluation_periods = "1"
+  datapoints_to_alarm = "1"
+  metric_name = "BurstBalance"
+  namespace = "AWS/RDS"
+  period = "60"
+  statistic = "Average"
+  treat_missing_data = "missing"
+  threshold = "25"
+  alarm_description = "Alarm at less than 25% credit remaining"
   alarm_actions = [aws_sns_topic.prod-cloudwatch-alerts.arn]
   ok_actions = [aws_sns_topic.prod-cloudwatch-alerts.arn]
 dimensions = {
@@ -224,4 +266,7 @@ resource "aws_cloudwatch_log_group" "prod-geoserver" {
   retention_in_days = "0"
 }
 
-
+resource "aws_cloudwatch_log_group" "prod-vpclogs" {
+  name = "ProdVPCLogGroup"
+  retention_in_days = "0"
+}

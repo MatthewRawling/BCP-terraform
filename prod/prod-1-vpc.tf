@@ -10,6 +10,19 @@ resource "aws_ebs_encryption_by_default" "prod-encryption" {
   enabled = true
 }
 
+terraform {
+   required_providers {    
+    aws = {
+         source = "hashicorp/aws"
+         version =  "~> 3.74.2"
+    }
+    consul = {
+      source = "hashicorp/consul"
+    }
+  }
+  required_version = ">= 0.13"
+}
+
 # BCP-PROD VPC resources: This will create 1 VPC with 4 Subnets, 1 Internet Gateway, 4 Route Tables. 
 
 resource "aws_vpc" "prod-default" {
@@ -132,4 +145,16 @@ resource "aws_nat_gateway" "prod-default" {
 tags = {
     Name = "PROD-NAT${count.index + 1}"
   }
+}
+
+# PROD VPC Flow Logging
+
+resource "aws_flow_log" "prod-vpc-flowlog" {
+  iam_role_arn    = aws_iam_role.prod-ec2-cloudwatch.arn
+  log_destination = aws_cloudwatch_log_group.prod-vpclogs.arn
+  traffic_type    = "ALL"
+  vpc_id          = aws_vpc.prod-default.id
+  tags = {
+        Name            = "PROD VPC Flow Log"
+        }
 }
