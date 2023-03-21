@@ -14,20 +14,20 @@ variable "region" {
 }
 
 
-variable "prod_cidr_block" {
-  default     = "10.2.0.0/16"
+variable "uat_cidr_block" {
+  default     = "10.1.0.0/16"
   type        = string
   description = "CIDR block for the VPC"
 }
 
-variable "prod_public_subnet_cidr_blocks" {
-  default     = ["10.2.0.0/24", "10.2.2.0/24"]
+variable "uat_public_subnet_cidr_blocks" {
+  default     = ["10.1.0.0/24", "10.1.2.0/24"]
   type        = list
   description = "List of public subnet CIDR blocks"
 }
 
-variable "prod_private_subnet_cidr_blocks" {
-  default     = ["10.2.1.0/24", "10.2.3.0/24"]
+variable "uat_private_subnet_cidr_blocks" {
+  default     = ["10.1.1.0/24", "10.1.3.0/24"]
   type        = list
   description = "List of private subnet CIDR blocks"
 }
@@ -44,40 +44,71 @@ variable "key_pair" {
   description = "EC2 Key Pair"
 }
 
-variable "bastion_ami_prod" {
-  default     = "ami-0ae94f6c1218137d6"
+#DEPRICATED AMI CONFIGURATIONS#
+
+#variable "application_ami_uat" {
+#  default     = "ami-0c0321eeeff4cb659"
+#  type        = string
+#  description = "AMI for UAT application EC2 instance"
+#}
+#
+#variable "mapping_ami_uat" {
+#  default     = "ami-080c7a4b93cf76e78"
+#  type        = string
+#  description = "AMI for UAT mapping EC2 instance"
+#}
+#
+#variable "application_ami_uat_temp" {
+#  default     = "ami-0547e35fc34d5cd92"
+#  type        = string
+#  description = "AMI for UAT application EC2 instance"
+#}
+#
+#variable "mapping_ami_uat_temp" {
+#  default     = "ami-0bce11c4230e4cd5b"
+#  type        = string
+#  description = "AMI for UAT mapping EC2 instance"
+#}
+
+#NEW AMI CONFIGURATIONS#
+
+variable "bastion_ami_uat" {
+  default     = "ami-0b7baa504be9a14c3"
   type        = string
   description = "AMI for bastion EC2 instance"
 }
 
-variable "application_ami_prod" {
-  default     = "ami-0f884d0beee77a5ba"
+variable "application_ami_uat_blue" {
+  default     = "ami-0c0321eeeff4cb659"
   type        = string
-  description = "AMI for PROD application EC2 instance"
+  description = "AMI for UAT application EC2 instance"
 }
 
-variable "mapping_ami_prod" {
-  default     = "ami-001b83ff54039c535"
+variable "mapping_ami_uat_blue" {
+  default     = "ami-080c7a4b93cf76e78"
   type        = string
-  description = "AMI for PROD mapping EC2 instance"
+  description = "AMI for UAT mapping EC2 instance"
 }
 
-variable "application_ami_prod_temp" {
-  default     = "ami-05db9677424678b79"
+variable "application_ami_uat_green" {
+  default     = "ami-0c0321eeeff4cb659"
   type        = string
-  description = "AMI for PROD application EC2 instance"
+  description = "AMI for UAT application EC2 instance"
 }
 
-variable "mapping_ami_prod_temp" {
-  default     = "ami-0fb7f1fe4877534c8"
+variable "mapping_ami_uat_green" {
+  default     = "ami-080c7a4b93cf76e78"
   type        = string
-  description = "AMI for PROD mapping EC2 instance"
+  description = "AMI for UAT mapping EC2 instance"
 }
 
-variable "rds_instance_prod" {
-  default     = "prod-bcp-db"
+#END#
+
+
+variable "rds_instance_uat" {
+  default     = "uat-bcp-db"
   type        = string
-  description = "PROD RDS instance name"
+  description = "UAT RDS instance name"
 }
 
 variable "bce_zone" {
@@ -104,64 +135,64 @@ variable "cffg_zone" {
   description = "cffg2023.co.uk zone"
 }
 
-variable "prod_cert" {
-  default     = "arn:aws:acm:eu-west-2:975971611990:certificate/ff9e8e41-7993-4d98-bd6f-de71b4702cf2"
+variable "uat_cert" {
+  default     = "arn:aws:acm:eu-west-2:975971611990:certificate/c751b490-39bb-402e-9363-e5e842edc319"
   type        = string
-  description = "cert for prod 2023 sites (eu)"
+  description = "cert for uat 2023 sites"
 }
 
-variable "prod_cert2" {
-  default     = "arn:aws:acm:us-east-1:975971611990:certificate/7dc39ace-9113-4077-b1ad-ed015b3a2133"
+variable "uat_cert2" {
+  default     = "arn:aws:acm:us-east-1:975971611990:certificate/0df0c2f6-399c-4724-9ff5-9e84e2be40b1"
   type        = string
-  description = "cert for prod 2023 sites (us)"
+  description = "cert for uat 2023 sites (us)"
 }
 
-variable "prod_cert3" {
-  default     = "arn:aws:acm:eu-west-2:975971611990:certificate/f9defe89-d151-43f4-974a-d5f7eaae30cc"
+variable "uat_cert3" {
+  default     = "arn:aws:acm:eu-west-2:975971611990:certificate/66c239f3-b46a-4a06-bffb-5308ddb616be"
   type        = string
-  description = "ext cert for prod bce site (eu)"
+  description = "ext cert for uat bce site (eu)"
 }
 
-variable "prod_cert4" {
-  default     = "arn:aws:acm:us-east-1:975971611990:certificate/2ef70a6b-f63c-4f31-a6d6-772779d08df0"
+variable "uat_cert4" {
+  default     = "arn:aws:acm:us-east-1:975971611990:certificate/b3250efb-671f-4b91-b314-5df36eda43b6"
   type        = string
-  description = "ext cert for prod bce (us)"
+  description = "ext cert for uat bce (us)"
 }
 
-variable "prod_cert5" {
-  default     = "arn:aws:acm:eu-west-2:975971611990:certificate/b2c57bd4-5dcb-4258-bd1d-8150dfdb1bea"
+variable "uat_cert5" {
+  default     = "arn:aws:acm:eu-west-2:975971611990:certificate/cc49daab-ce64-4dea-bfce-1d893756bd5c"
   type        = string
-  description = "ext cert for prod bcs (eu)"
+  description = "ext cert for uat bcs (eu)"
 }
 
-variable "prod_cert6" {
-  default     = "arn:aws:acm:us-east-1:975971611990:certificate/fe99ef45-bd4d-40e2-9081-41492fb82c7f"
+variable "uat_cert6" {
+  default     = "arn:aws:acm:us-east-1:975971611990:certificate/9f922f26-4797-48f8-9501-f65f3e9fbe92"
   type        = string
-  description = "ext cert for prod bcs (us)"
+  description = "ext cert for uat bcs (us)"
 }
 
-variable "prod_cert7" {
-  default     = "arn:aws:acm:eu-west-2:975971611990:certificate/cc40c391-6b4e-451f-92ca-106032188192"
+variable "uat_cert7" {
+  default     = "arn:aws:acm:eu-west-2:975971611990:certificate/93d87aa1-d3f7-483c-a01c-9de4977d2065"
   type        = string
-  description = "ext cert for prod bcw (eu)"
+  description = "ext cert for uat bcw (eu)"
 }
 
-variable "prod_cert8" {
-  default     = "arn:aws:acm:us-east-1:975971611990:certificate/99fe24fa-e979-45b8-91af-3ac9a6701ec0"
+variable "uat_cert8" {
+  default     = "arn:aws:acm:us-east-1:975971611990:certificate/04f89af5-ff3c-4dbd-a343-200bbc5c28c0"
   type        = string
-  description = "ext cert for prod bcw (us)"
+  description = "ext cert for uat bcw (us)"
 }
 
-variable "prod_cert9" {
-  default     = "arn:aws:acm:eu-west-2:975971611990:certificate/93f9aeb1-fade-4dc9-bfcf-cd5ce1e10d6d"
+variable "uat_cert9" {
+  default     = "arn:aws:acm:eu-west-2:975971611990:certificate/a863204a-b8a9-4afb-ac77-8bdbead60237"
   type        = string
-  description = "ext cert for prod cffg (eu)"
+  description = "ext cert for uat cffg (eu)"
 }
 
-variable "prod_cert10" {
-  default     = "arn:aws:acm:us-east-1:975971611990:certificate/7dfcee7c-1fff-4bd4-aa88-651d85437edb"
+variable "uat_cert10" {
+  default     = "arn:aws:acm:us-east-1:975971611990:certificate/cbdba63e-e4be-4608-9252-1870633a1bd2"
   type        = string
-  description = "ext cert for prod cffg (us)"
+  description = "ext cert for uat cffg (us)"
 }
 
 variable "bcp-auth" {
@@ -173,79 +204,78 @@ variable "bcp-auth" {
 #variables for target group HC
 #running config
 
-variable "prod-tg-unhealthy" {
+variable "uat-tg-unhealthy" {
   default     = "3"
   type        = string
   description = "Unhealthy threshold. The number of consecutive health check failures required before considering a target unhealthy."
 }
 
-variable "prod-tg-timeout" {
+variable "uat-tg-timeout" {
   default     = "5"
   type        = string
   description = "Timeout. The amount of time, in seconds, during which no response means a failed health check."
 }
 
-variable "prod-tg-interval" {
+variable "uat-tg-interval" {
   default     = "30"
   type        = string
   description = "Interval. The approximate amount of time between health checks of an individual target"
 }
 
-variable "prod-cw-threshold" {
+variable "uat-cw-threshold" {
   default     = "75"
   type        = string
-  description = "prod-cw-threshold"
+  description = "uat-cw-threshold"
 }
 
-variable "prod-cw-data" {
+variable "uat-cw-data" {
   default     = "1"
   type        = string
-  description = "prod-cw-data"
+  description = "uat-cw-data"
 }
 
-variable "prod-cw-eval" {
+variable "uat-cw-eval" {
   default     = "1"
   type        = string
-  description = "prod-cw-eval"
+  description = "uat-cw-eval"
 }
 
 
 
 #deployment config
 
-#variable "prod-tg-unhealthy" {
+#variable "uat-tg-unhealthy" {
 #  default     = "10"
 #  type        = string
 #  description = "Unhealthy threshold. The number of consecutive health check failures required before considering a target unhealthy."
 #}
-#
-#variable "prod-tg-timeout" {
+#variable "uat-tg-timeout" {
 #  default     = "120"
 #  type        = string
 #  description = "Timeout. The amount of time, in seconds, during which no response means a failed health check."
 #}
 #
-#variable "prod-tg-interval" {
+#variable "uat-tg-interval" {
 #  default     = "300"
 #  type        = string
 #  description = "Interval. The approximate amount of time between health checks of an individual target"
 #}
 #
-#variable "prod-cw-threshold" {
+#variable "uat-cw-threshold" {
 #  default     = "99"
 #  type        = string
-#  description = "prod-cw-threshold"
+#  description = "uat-cw-threshold"
 #}
 #
-#variable "prod-cw-data" {
+#variable "uat-cw-data" {
 #  default     = "99"
 #  type        = string
-#  description = "prod-cw-data"
+#  description = "uat-cw-data"
 #}
 #
-#variable "prod-cw-eval" {
+#variable "uat-cw-eval" {
 #  default     = "99"
 #  type        = string
-#  description = "prod-cw-eval"
+#  description = "uat-cw-eval"
 #}
 
