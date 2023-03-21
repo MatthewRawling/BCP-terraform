@@ -44,35 +44,65 @@ variable "key_pair" {
   description = "EC2 Key Pair"
 }
 
+#DEPRICATED AMI CONFIGURATIONS#
+
+#variable "application_ami_dev" {
+#  default     = "ami-0d91ff3c201b92f61"
+#  type        = string
+#  description = "AMI for DEV application EC2 instance"
+#}
+#
+#variable "mapping_ami_dev" {
+#  default     = "ami-01a18357b8de4e513"
+#  type        = string
+#  description = "AMI for DEV mapping EC2 instance"
+#}
+#
+#variable "application_ami_dev_temp" {
+#  default     = "ami-0a1a42725b932b8fe"
+#  type        = string
+#  description = "AMI for DEV application EC2 instance"
+#}
+#
+#variable "mapping_ami_dev_temp" {
+#  default     = "ami-07fe9580227cdac4f"
+#  type        = string
+#  description = "AMI for DEV mapping EC2 instance"
+#}
+
+#NEW AMI CONFIGURATIONS#
+
 variable "bastion_ami_dev" {
-  default     = "ami-0f78ae2fae25a1310"
+  default     = "ami-0d7442fd748085252"
   type        = string
   description = "AMI for bastion EC2 instance"
 }
 
-variable "application_ami_dev" {
+variable "application_ami_dev_blue" {
+  default     = "ami-0e98155084f7b5b36"
+  type        = string
+  description = "AMI for DEV application EC2 instance"
+}
+
+variable "mapping_ami_dev_blue" {
+  default     = "ami-0526fdb139f9115aa"
+  type        = string
+  description = "AMI for DEV mapping EC2 instance"
+}
+
+variable "application_ami_dev_green" {
   default     = "ami-0d91ff3c201b92f61"
   type        = string
   description = "AMI for DEV application EC2 instance"
 }
 
-variable "mapping_ami_dev" {
+variable "mapping_ami_dev_green" {
   default     = "ami-01a18357b8de4e513"
   type        = string
   description = "AMI for DEV mapping EC2 instance"
 }
 
-variable "application_ami_dev_temp" {
-  default     = "ami-0a1a42725b932b8fe"
-  type        = string
-  description = "AMI for DEV application EC2 instance"
-}
-
-variable "mapping_ami_dev_temp" {
-  default     = "ami-07fe9580227cdac4f"
-  type        = string
-  description = "AMI for DEV mapping EC2 instance"
-}
+#END#
 
 variable "rds_instance_dev" {
   default     = "dev-bcp-db"
