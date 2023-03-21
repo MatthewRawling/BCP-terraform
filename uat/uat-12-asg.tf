@@ -1,25 +1,103 @@
+#DEPRICATED LAUNCH CONFIGURATIONS#
+
 # Create UAT APP Launch Configuration
-resource "aws_launch_configuration" "UAT-APP-LC" {
-  name = "UAT BCE Application Launch Configuration"
-  image_id               = var.application_ami_uat
-  instance_type          = "t3.medium"
-  iam_instance_profile = "${aws_iam_instance_profile.uat-ec2-cloudwatch.name}"
-  security_groups        = ["${aws_security_group.UAT-EC2-APP-SG.id}"]
-  key_name               = var.key_pair
-  enable_monitoring = true
-  metadata_options {
-  http_endpoint = "enabled"
-  http_tokens = "required"
-  }  
-  lifecycle {
-    create_before_destroy = false
-  }
-}
+#resource "aws_launch_configuration" "UAT-APP-LC" {
+#  name = "UAT BCE Application Launch Configuration"
+#  image_id               = var.application_ami_uat
+#  instance_type          = "t3.medium"
+#  iam_instance_profile = "${aws_iam_instance_profile.uat-ec2-cloudwatch.name}"
+#  security_groups        = ["${aws_security_group.UAT-EC2-APP-SG.id}"]
+#  key_name               = var.key_pair
+#  enable_monitoring = true
+#  metadata_options {
+#  http_endpoint = "enabled"
+#  http_tokens = "required"
+#  }  
+#  lifecycle {
+#    create_before_destroy = false
+#  }
+#}
 
 # Create UAT MAP Launch Configuration
-resource "aws_launch_configuration" "UAT-MAP-LC" {
-  name = "UAT BCE Mapping Launch Configuration"
-  image_id               = var.mapping_ami_uat
+#resource "aws_launch_configuration" "UAT-MAP-LC" {
+#  name = "UAT BCE Mapping Launch Configuration"
+#  image_id               = var.mapping_ami_uat
+#  instance_type          = "t3.medium"
+#  iam_instance_profile = "${aws_iam_instance_profile.uat-ec2-cloudwatch.name}"
+#  security_groups        = ["${aws_security_group.UAT-EC2-MAP-SG.id}"]
+#  key_name               = var.key_pair
+#  enable_monitoring = true
+#  metadata_options {
+#  http_endpoint = "enabled"
+#  http_tokens = "required"
+#  }
+#  lifecycle {
+#    create_before_destroy = false
+#  }
+#}
+
+# Create UAT APP Temporary Launch Configuration
+#resource "aws_launch_configuration" "UAT-APP-LC-TEMP" {
+#  name = "UAT BCE Temporary Application Launch Configuration"
+#  image_id               = var.application_ami_uat_temp
+#  instance_type          = "t3.medium"
+#  iam_instance_profile = "${aws_iam_instance_profile.uat-ec2-cloudwatch.name}"
+#  security_groups        = ["${aws_security_group.UAT-EC2-APP-SG.id}"]
+#  key_name               = var.key_pair
+#  enable_monitoring = true
+#  metadata_options {
+#  http_endpoint = "enabled"
+#  http_tokens = "required"
+#  }
+#
+#  lifecycle {
+#    create_before_destroy = false
+#  }
+#}
+
+# Create UAT MAP Temporary Launch Configuration
+#resource "aws_launch_configuration" "UAT-MAP-LC-TEMP" {
+#  name = "UAT BCE Temporary Mapping Launch Configuration"
+#  image_id               = var.mapping_ami_uat_temp
+#  instance_type          = "t3.medium"
+#  iam_instance_profile = "${aws_iam_instance_profile.uat-ec2-cloudwatch.name}"
+#  security_groups        = ["${aws_security_group.UAT-EC2-MAP-SG.id}"]
+#  key_name               = var.key_pair
+#  enable_monitoring = true
+#  metadata_options {
+#  http_endpoint = "enabled"
+#  http_tokens = "required"
+#  }
+# 
+#  lifecycle {
+#    create_before_destroy = false
+#  }
+#}
+
+#NEW LAUNCH CONFIGURATIONS#
+
+# Create UAT APP BLUE Launch Configuration
+resource "aws_launch_configuration" "UAT-APP-LC-BLUE" {
+  name = "UAT BCE BLUE Application Launch Configuration"
+  image_id               = var.application_ami_uat_blue
+  instance_type          = "t3.medium"
+  iam_instance_profile = "${aws_iam_instance_profile.uat-ec2-cloudwatch.name}"
+  security_groups        = ["${aws_security_group.UAT-EC2-APP-SG.id}"]
+  key_name               = var.key_pair
+  enable_monitoring = true
+  metadata_options {
+  http_endpoint = "enabled"
+  http_tokens = "required"
+  }
+  lifecycle {
+    create_before_destroy = false
+  }
+}
+
+# Create UAT MAP BLUE Launch Configuration
+resource "aws_launch_configuration" "UAT-MAP-LC-BLUE" {
+  name = "UAT BCE BLUE Mapping Launch Configuration"
+  image_id               = var.mapping_ami_uat_blue
   instance_type          = "t3.medium"
   iam_instance_profile = "${aws_iam_instance_profile.uat-ec2-cloudwatch.name}"
   security_groups        = ["${aws_security_group.UAT-EC2-MAP-SG.id}"]
@@ -34,10 +112,10 @@ resource "aws_launch_configuration" "UAT-MAP-LC" {
   }
 }
 
-# Create UAT APP Temporary Launch Configuration
-resource "aws_launch_configuration" "UAT-APP-LC-TEMP" {
-  name = "UAT BCE Temporary Application Launch Configuration"
-  image_id               = var.application_ami_uat_temp
+# Create UAT APP GREEN Launch Configuration
+resource "aws_launch_configuration" "UAT-APP-LC-GREEN" {
+  name = "UAT BCE GREEN Application Launch Configuration"
+  image_id               = var.application_ami_uat_green
   instance_type          = "t3.medium"
   iam_instance_profile = "${aws_iam_instance_profile.uat-ec2-cloudwatch.name}"
   security_groups        = ["${aws_security_group.UAT-EC2-APP-SG.id}"]
@@ -53,10 +131,10 @@ resource "aws_launch_configuration" "UAT-APP-LC-TEMP" {
   }
 }
 
-# Create UAT MAP Temporary Launch Configuration
-resource "aws_launch_configuration" "UAT-MAP-LC-TEMP" {
-  name = "UAT BCE Temporary Mapping Launch Configuration"
-  image_id               = var.mapping_ami_uat_temp
+# Create UAT MAP GREEN Launch Configuration
+resource "aws_launch_configuration" "UAT-MAP-LC-GREEN" {
+  name = "UAT BCE GREEN Mapping Launch Configuration"
+  image_id               = var.mapping_ami_uat_green
   instance_type          = "t3.medium"
   iam_instance_profile = "${aws_iam_instance_profile.uat-ec2-cloudwatch.name}"
   security_groups        = ["${aws_security_group.UAT-EC2-MAP-SG.id}"]
@@ -66,7 +144,7 @@ resource "aws_launch_configuration" "UAT-MAP-LC-TEMP" {
   http_endpoint = "enabled"
   http_tokens = "required"
   }
- 
+
   lifecycle {
     create_before_destroy = false
   }
@@ -76,7 +154,7 @@ resource "aws_launch_configuration" "UAT-MAP-LC-TEMP" {
 resource "aws_autoscaling_group" "UAT-APP-ASG" {
   count = "1"
   name = "UAT Application Auto Scale Group"
-  launch_configuration = "${aws_launch_configuration.UAT-APP-LC-TEMP.id}"
+  launch_configuration = "${aws_launch_configuration.UAT-APP-LC-GREEN.id}"
   # availability_zones = var.availability_zones
   vpc_zone_identifier = aws_subnet.uat-private.*.id
   min_size = 1
@@ -126,7 +204,7 @@ resource "aws_autoscaling_group" "UAT-APP-ASG" {
 resource "aws_autoscaling_group" "UAT-MAP-ASG" {
   count = "1"
   name = "UAT Mapping Auto Scale Group"
-  launch_configuration = "${aws_launch_configuration.UAT-MAP-LC-TEMP.id}"
+  launch_configuration = "${aws_launch_configuration.UAT-MAP-LC-GREEN.id}"
   # availability_zones = var.availability_zones
   vpc_zone_identifier = aws_subnet.uat-private.*.id
   min_size = 1

@@ -44,35 +44,66 @@ variable "key_pair" {
   description = "EC2 Key Pair"
 }
 
+#DEPRICATED AMI CONFIGURATIONS#
+
+#variable "application_ami_uat" {
+#  default     = "ami-0c0321eeeff4cb659"
+#  type        = string
+#  description = "AMI for UAT application EC2 instance"
+#}
+#
+#variable "mapping_ami_uat" {
+#  default     = "ami-080c7a4b93cf76e78"
+#  type        = string
+#  description = "AMI for UAT mapping EC2 instance"
+#}
+#
+#variable "application_ami_uat_temp" {
+#  default     = "ami-0547e35fc34d5cd92"
+#  type        = string
+#  description = "AMI for UAT application EC2 instance"
+#}
+#
+#variable "mapping_ami_uat_temp" {
+#  default     = "ami-0bce11c4230e4cd5b"
+#  type        = string
+#  description = "AMI for UAT mapping EC2 instance"
+#}
+
+#NEW AMI CONFIGURATIONS#
+
 variable "bastion_ami_uat" {
-  default     = "ami-03d17d5e2b2d0ca4a"
+  default     = "ami-0b7baa504be9a14c3"
   type        = string
   description = "AMI for bastion EC2 instance"
 }
 
-variable "application_ami_uat" {
-  default     = "ami-0eca1d2c5dda20bed"
+variable "application_ami_uat_blue" {
+  default     = "ami-0c0321eeeff4cb659"
   type        = string
   description = "AMI for UAT application EC2 instance"
 }
 
-variable "mapping_ami_uat" {
-  default     = "ami-02013fd085e79dcdc"
+variable "mapping_ami_uat_blue" {
+  default     = "ami-080c7a4b93cf76e78"
   type        = string
   description = "AMI for UAT mapping EC2 instance"
 }
 
-variable "application_ami_uat_temp" {
-  default     = "ami-0547e35fc34d5cd92"
+variable "application_ami_uat_green" {
+  default     = "ami-0c0321eeeff4cb659"
   type        = string
   description = "AMI for UAT application EC2 instance"
 }
 
-variable "mapping_ami_uat_temp" {
-  default     = "ami-0bce11c4230e4cd5b"
+variable "mapping_ami_uat_green" {
+  default     = "ami-080c7a4b93cf76e78"
   type        = string
   description = "AMI for UAT mapping EC2 instance"
 }
+
+#END#
+
 
 variable "rds_instance_uat" {
   default     = "uat-bcp-db"
